@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const bookingSchema = new mongoose.Schema(
   {
     userId: {
@@ -7,24 +8,50 @@ const bookingSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+
     pickupCity: {
       type: String,
       required: true,
     },
+
     dropCity: {
       type: String,
       required: true,
     },
+
     fare: {
       type: Number,
       required: true,
     },
+
+
+    date: {
+      type: String,
+      required: true,
+    },
+
+
+    time: {
+      type: String,
+      required: true,
+    },
+
+
     status: {
       type: String,
       default: "Pending",
     },
   },
-  { timestamps: true }
+
+  { timestamps:true }
+
 );
 
-module.exports = mongoose.model("Booking", bookingSchema);
+
+
+module.exports =
+mongoose.models.Booking ||
+mongoose.model(
+  "Booking",
+  bookingSchema
+);

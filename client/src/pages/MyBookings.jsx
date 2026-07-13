@@ -1,129 +1,179 @@
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { useEffect, useState } from "react";
+import Footer from "../components/Footer";
 import api from "../services/api";
 
-function MyBookings() {
 
-  const [bookings, setBookings] = useState([]);
+function MyBookings(){
 
-  useEffect(() => {
-    getBookings();
-  }, []);
+  const [bookings,setBookings] = useState([]);
 
 
-  const getBookings = async () => {
+  useEffect(()=>{
 
-    try {
+    fetchBookings();
 
-      const userId = localStorage.getItem("userId");
+  },[]);
 
-      console.log("User ID:", userId);
 
-      const response = await api.get(`/booking/my/${userId}`);
 
-      console.log(response.data);
+  const fetchBookings = async()=>{
+
+    try{
+
+      const user = JSON.parse(
+        localStorage.getItem("user")
+      );
+
+
+      if(!user){
+        return;
+      }
+
+
+      const response = await api.get(
+        `/booking/my/${user._id}`
+      );
+
 
       setBookings(response.data);
 
-    } catch (error) {
+
+    }
+    catch(error){
 
       console.log(error);
-      alert("Failed to load bookings");
 
     }
 
   };
 
 
-  const cancelBooking = async (id) => {
-
-    try {
-
-      await api.put(`/booking/cancel/${id}`);
-
-      alert("Booking Cancelled 🚕");
-
-      getBookings();
-
-    } catch(error) {
-
-      console.log(error);
-      alert("Cancel Failed");
-
-    }
-
-  };
-
-return (
-  <div>
-
-    <Navbar />
-
-    <h1 style={{textAlign:"center"}}>
-      My Bookings 🚕
-    </h1>
 
 
-    {
-      bookings.length === 0 ? (
 
-        <h3 style={{textAlign:"center"}}>
-          No bookings found
-        </h3>
+  return(
 
-      ) : (
+    <div
+      style={{
+        minHeight:"100vh",
+        background:"#fff8e7",
+        display:"flex",
+        flexDirection:"column"
+      }}
+    >
 
-        bookings.map((booking)=>(
 
-          <div
-            key={booking._id}
+      <Navbar />
+
+
+
+      <div
+        style={{
+          flex:1,
+          padding:"40px",
+          textAlign:"center"
+        }}
+      >
+
+
+        <h1
+          style={{
+            fontSize:"32px",
+            color:"#222"
+          }}
+        >
+          📋 My Bookings
+        </h1>
+
+
+
+
+
+        {
+          bookings.length === 0 ?
+
+
+          <p
             style={{
-              width:"400px",
-              margin:"20px auto",
-              background:"white",
-              padding:"20px",
-              borderRadius:"10px",
-              boxShadow:"0px 0px 10px gray"
+              marginTop:"50px",
+              fontSize:"20px",
+              color:"#777"
             }}
           >
-
-            <h2>
-              {booking.pickupCity} → {booking.dropCity}
-            </h2>
+            No Bookings Yet 🚕
+          </p>
 
 
-            <p>
-              💰 Fare: ₹{booking.fare}
-            </p>
+
+          :
 
 
-            <p>
-              📌 Status: {booking.status}
-            </p>
+
+          bookings.map((booking)=>(
+
+            <div
+              key={booking._id}
+              style={{
+                width:"320px",
+                margin:"30px auto",
+                background:"#fff",
+                padding:"25px",
+                borderRadius:"15px",
+                boxShadow:"0 5px 15px rgba(0,0,0,0.2)"
+              }}
+            >
 
 
-            {
-              booking.status === "Pending" && (
-
-                <button
-                  onClick={() => cancelBooking(booking._id)}
-                >
-                  Cancel Booking
-                </button>
-
-              )
-            }
+              <h2>
+                🚖 Cab Ride
+              </h2>
 
 
-          </div>
+              <p>
+                From: <b>{booking.pickupCity}</b>
+              </p>
 
-        ))
 
-      )
-    }
+              <p>
+                To: <b>{booking.dropCity}</b>
+              </p>
 
-  </div>
+
+              <p>
+                Fare: <b>₹{booking.fare}</b>
+              </p>
+
+
+              <p>
+                Status: <b>{booking.status}</b>
+              </p>
+
+
+
+            </div>
+
+
+          ))
+
+
+        }
+
+
+
+      </div>
+
+
+
+
+      <Footer />
+
+
+    </div>
+
   );
+
 }
+
 
 export default MyBookings;

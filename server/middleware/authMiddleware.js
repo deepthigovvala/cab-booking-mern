@@ -1,37 +1,69 @@
 const jwt = require("jsonwebtoken");
 
-const protect = (req, res, next) => {
-  try {
+
+const protect = (req,res,next)=>{
+
+  try{
+
+
     const authHeader = req.headers.authorization;
 
-    console.log("Authorization Header:", authHeader);
 
-    if (!authHeader) {
+    if(!authHeader){
+
       return res.status(401).json({
-        message: "No Token",
+        message:"No Authorization header"
       });
+
     }
 
-    const token = authHeader.replace("Bearer ", "");
 
-    console.log("Token:", token);
-    console.log("JWT Secret:", process.env.JWT_SECRET);
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const token = authHeader.split(" ")[1];
 
-    console.log("Decoded:", decoded);
+
+
+    if(!token){
+
+      return res.status(401).json({
+        message:"Token not found"
+      });
+
+    }
+
+
+
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET
+    );
+
+
 
     req.user = decoded;
 
+
+
     next();
-  } catch (error) {
-    console.log("JWT Error Name:", error.name);
-    console.log("JWT Error Message:", error.message);
+
+
+
+  }
+  catch(error){
+
+    console.log(error);
+
 
     return res.status(401).json({
-      message: "Invalid Token",
+      message:"Invalid Token"
     });
+
   }
+
 };
 
-module.exports = { protect };
+
+
+module.exports = {
+  protect
+};

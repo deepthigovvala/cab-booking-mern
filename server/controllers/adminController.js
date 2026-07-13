@@ -1,18 +1,94 @@
 const User = require("../models/User");
+const Booking = require("../models/Booking");
 
-// Get All Users
-const getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find().select("-password");
 
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
+
+
+// Dashboard Stats
+
+const getStats = async (req,res)=>{
+
+    try{
+
+
+        const users = await User.countDocuments();
+
+        const bookings = await Booking.countDocuments();
+
+
+        const cabs = 0;
+
+
+
+        res.json({
+
+            users,
+            cabs,
+            bookings
+
+        });
+
+
+    }
+    catch(error){
+
+        res.status(500).json({
+
+            message:error.message
+
+        });
+
+    }
+
 };
 
+
+
+
+
+
+
+// Get All Users
+
+const getAllUsers = async(req,res)=>{
+
+
+    try{
+
+
+        const users = await User.find()
+        .select("-password");
+
+
+
+        res.json(users);
+
+
+    }
+    catch(error){
+
+
+        res.status(500).json({
+
+            message:error.message
+
+        });
+
+
+    }
+
+
+};
+
+
+
+
+
+
+
 module.exports = {
-  getAllUsers,
+
+    getStats,
+    getAllUsers
+
 };

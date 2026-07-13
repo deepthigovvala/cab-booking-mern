@@ -1,160 +1,238 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
+
 
 function Register() {
+
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [name,setName] = useState("");
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const [error,setError] = useState("");
+  const [message,setMessage] = useState("");
 
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const handleRegister = async (e)=>{
 
-  const validateForm = () => {
-    const { name, email, password } = formData;
-
-    if (!name || !email || !password) {
-      setError("Please fill all fields");
-      return false;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(email)) {
-      setError("Enter a valid email");
-      return false;
-    }
-
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters");
-      return false;
-    }
-
-    setError("");
-    return true;
-  };
-
-  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    try{
 
-    setLoading(true);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        {
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }
-      );
-
-      alert(response.data.message || "Registration Successful");
-
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
+      await api.post("/auth/register",
+      {
+        name,
+        email,
+        password
       });
 
-      navigate("/");
-    } catch (err) {
-      console.log(err);
 
-      setError(
-        err.response?.data?.message || "Registration Failed"
-      );
-    } finally {
-      setLoading(false);
+      setMessage("Registration successful! Please login.");
+
+
+      setTimeout(()=>{
+        navigate("/login");
+      },1500);
+
+
     }
+    catch(error){
+
+      console.log(error);
+
+      setError("Registration failed");
+
+    }
+
   };
 
+
   return (
+
     <div
       style={{
-        width: "350px",
-        margin: "80px auto",
+        minHeight:"100vh",
+        background:"#fff8e7",
+        display:"flex",
+        justifyContent:"center",
+        alignItems:"center",
+        padding:"20px"
       }}
     >
-      <h2>Register</h2>
 
-      {error && (
-        <p style={{ color: "red" }}>{error}</p>
-      )}
 
-      <form onSubmit={handleSubmit}>
+      <div
+        style={{
+          width:"360px",
+          background:"#fff",
+          padding:"30px",
+          borderRadius:"15px",
+          boxShadow:"0px 5px 20px rgba(0,0,0,0.2)",
+          textAlign:"center"
+        }}
+      >
 
-        <input
-          type="text"
-          name="name"
-          placeholder="Enter Name"
-          value={formData.name}
-          onChange={handleChange}
+
+        <h1
           style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "10px",
+            fontSize:"24px",
+            fontWeight:"700",
+            color:"#222",
+            marginBottom:"10px"
           }}
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Email"
-          value={formData.email}
-          onChange={handleChange}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "10px",
-          }}
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          value={formData.password}
-          onChange={handleChange}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "10px",
-          }}
-        />
-
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "10px",
-          }}
-          disabled={loading}
         >
-          {loading ? "Registering..." : "Register"}
-        </button>
+          🚕 Create Account
+        </h1>
 
-      </form>
 
-      <p style={{ marginTop: "15px" }}>
-        Already have an account?{" "}
-        <a href="/">Login</a>
-      </p>
+        <p
+          style={{
+            color:"#666",
+            marginBottom:"20px",
+            fontSize:"15px"
+          }}
+        >
+          Register to book your cab
+        </p>
+
+
+
+        {
+          error &&
+          <p
+            style={{
+              color:"red"
+            }}
+          >
+            {error}
+          </p>
+        }
+
+
+
+        {
+          message &&
+          <p
+            style={{
+              color:"green"
+            }}
+          >
+            {message}
+          </p>
+        }
+
+
+
+
+        <form onSubmit={handleRegister}>
+
+
+          <input
+            type="text"
+            placeholder="Enter Name"
+            value={name}
+            onChange={(e)=>setName(e.target.value)}
+            required
+            style={inputStyle}
+          />
+
+
+
+          <input
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+            required
+            style={inputStyle}
+          />
+
+
+
+          <input
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
+            required
+            style={inputStyle}
+          />
+
+
+
+          <button
+            type="submit"
+            style={{
+              width:"100%",
+              padding:"12px",
+              background:"#28a745",
+              color:"#fff",
+              border:"none",
+              borderRadius:"8px",
+              fontWeight:"bold",
+              fontSize:"16px",
+              cursor:"pointer"
+            }}
+          >
+            Register
+          </button>
+
+
+        </form>
+
+
+
+
+        <p
+          style={{
+            marginTop:"20px",
+            color:"#555",
+            fontSize:"14px"
+          }}
+        >
+
+          Already have an account?
+
+
+          <span
+            onClick={()=>navigate("/login")}
+            style={{
+              color:"#007bff",
+              cursor:"pointer",
+              marginLeft:"5px",
+              fontWeight:"bold"
+            }}
+          >
+            Login
+          </span>
+
+
+        </p>
+
+
+      </div>
+
+
     </div>
+
   );
+
 }
+
+
+
+const inputStyle = {
+
+  width:"100%",
+  padding:"12px",
+  marginBottom:"15px",
+  borderRadius:"8px",
+  border:"1px solid #ccc",
+  fontSize:"15px",
+  boxSizing:"border-box"
+
+};
+
 
 export default Register;

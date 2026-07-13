@@ -1,74 +1,149 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 function Navbar() {
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+
+
+  const logout = () => {
 
     localStorage.removeItem("token");
-    localStorage.removeItem("userId");
+    localStorage.removeItem("user");
 
-    alert("Logged Out Successfully 👋");
+    navigate("/login");
 
-    navigate("/");
   };
 
+
+
   return (
-    <div
+
+    <nav
       style={{
-        background: "#333",
-        padding: "15px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center"
+        background:"#111",
+        color:"#fff",
+        padding:"15px 40px",
+        display:"flex",
+        justifyContent:"space-between",
+        alignItems:"center",
+        boxShadow:"0px 3px 10px rgba(0,0,0,0.2)"
       }}
     >
-      <div>
-        <Link
-          to="/home"
-          style={{ color: "white", marginRight: "20px", textDecoration: "none" }}
-        >
-          Home
-        </Link>
 
-        <Link
-          to="/book"
-          style={{ color: "white", marginRight: "20px", textDecoration: "none" }}
-        >
-          Book Cab
-        </Link>
 
-        <Link
-          to="/mybookings"
-          style={{ color: "white", marginRight: "20px", textDecoration: "none" }}
-        >
-          My Bookings
-        </Link>
 
-        <Link
-          to="/admin"
-          style={{ color: "white", textDecoration: "none" }}
-        >
-          Admin
-        </Link>
-      </div>
+      {/* Logo */}
 
-      <button
-        onClick={handleLogout}
+
+      <h2
+        onClick={()=>navigate("/home")}
         style={{
-          background: "red",
-          color: "white",
-          border: "none",
-          padding: "8px 15px",
-          cursor: "pointer",
-          borderRadius: "5px"
+          margin:"0",
+          cursor:"pointer",
+          color:"#FFD700",
+          fontSize:"24px"
         }}
       >
-        Logout
-      </button>
-    </div>
+        🚖 Cab Booking
+      </h2>
+
+
+
+
+
+      {/* Menu */}
+
+
+      <div
+        style={{
+          display:"flex",
+          gap:"22px",
+          alignItems:"center"
+        }}
+      >
+
+
+
+        <span
+          onClick={()=>navigate("/home")}
+          style={linkStyle}
+        >
+          Home
+        </span>
+
+
+
+
+        <span
+          onClick={()=>navigate("/book")}
+          style={linkStyle}
+        >
+          Book Cab
+        </span>
+
+
+
+
+        <span
+          onClick={()=>navigate("/mybookings")}
+          style={linkStyle}
+        >
+          My Bookings
+        </span>
+
+
+
+
+        <span
+          onClick={()=>navigate("/admin")}
+          style={linkStyle}
+        >
+          Admin Dashboard
+        </span>
+
+
+
+
+
+        <button
+          onClick={logout}
+          style={{
+            background:"#FFD700",
+            color:"#111",
+            border:"none",
+            padding:"8px 18px",
+            borderRadius:"8px",
+            fontWeight:"bold",
+            cursor:"pointer"
+          }}
+        >
+          Logout
+        </button>
+
+
+
+      </div>
+
+
+
+    </nav>
+
   );
+
 }
+
+
+
+const linkStyle = {
+
+  cursor:"pointer",
+  fontSize:"15px",
+  fontWeight:"500"
+
+};
+
+
 
 export default Navbar;

@@ -1,114 +1,323 @@
 const Booking = require("../models/Booking");
 
-// Book Cab
+
+
+// Create Booking
+
 const bookCab = async (req, res) => {
+
   try {
+
+    const {
+      pickupCity,
+      dropCity,
+      fare,
+      date,
+      time
+    } = req.body;
+
+
+
     const booking = await Booking.create({
+
       userId: req.user.id,
-      pickupCity: req.body.pickupCity,
-      dropCity: req.body.dropCity,
-      fare: req.body.fare
+
+      pickupCity,
+
+      dropCity,
+
+      fare,
+
+      date,
+
+      time
+
     });
 
-    res.json({
-      message: "Booking created successfully",
+
+
+    res.status(201).json({
+
+      message:"Booking created successfully",
+
       booking
+
     });
 
-  } catch (error) {
+
+  }
+  catch(error){
+
+    console.log(error);
+
     res.status(500).json({
-      message: error.message
+
+      message:error.message
+
     });
+
   }
+
 };
 
-// Get My Bookings
-const getMyBookings = async (req, res) => {
-  try {
+
+
+
+
+
+// Get User Bookings
+
+const getMyBookings = async(req,res)=>{
+
+  try{
+
+
     const bookings = await Booking.find({
-      userId: req.params.userId,
+
+      userId:req.params.userId
+
     });
 
-    res.status(200).json(bookings);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+
+
+    res.json(bookings);
+
+
   }
+  catch(error){
+
+
+    res.status(500).json({
+
+      message:error.message
+
+    });
+
+
+  }
+
 };
+
+
+
+
+
+
+
 
 // Cancel Booking
-const cancelBooking = async (req, res) => {
-  try {
+
+const cancelBooking = async(req,res)=>{
+
+  try{
+
+
     const booking = await Booking.findByIdAndUpdate(
+
       req.params.id,
-      { status: "Cancelled" },
-      { new: true }
+
+      {
+        status:"Cancelled"
+      },
+
+      {
+        new:true
+      }
+
     );
 
+
     res.json({
-      message: "Booking Cancelled Successfully",
-      booking,
+
+      message:"Booking Cancelled",
+
+      booking
+
     });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+
+
   }
+  catch(error){
+
+    res.status(500).json({
+
+      message:error.message
+
+    });
+
+  }
+
 };
+
+
+
+
+
+
+
 
 // Accept Booking
-const acceptBooking = async (req, res) => {
-  try {
+
+const acceptBooking = async(req,res)=>{
+
+  try{
+
+
     const booking = await Booking.findByIdAndUpdate(
+
       req.params.id,
-      { status: "Accepted" },
-      { new: true }
+
+      {
+        status:"Accepted"
+      },
+
+      {
+        new:true
+      }
+
     );
 
+
     res.json({
-      message: "Booking Accepted",
-      booking,
+
+      message:"Booking Accepted",
+
+      booking
+
     });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+
+
+
   }
+  catch(error){
+
+
+    res.status(500).json({
+
+      message:error.message
+
+    });
+
+
+  }
+
 };
+
+
+
+
+
+
+
+
 
 // Reject Booking
-const rejectBooking = async (req, res) => {
-  try {
+
+const rejectBooking = async(req,res)=>{
+
+  try{
+
+
     const booking = await Booking.findByIdAndUpdate(
+
       req.params.id,
-      { status: "Rejected" },
-      { new: true }
+
+      {
+        status:"Rejected"
+      },
+
+      {
+        new:true
+      }
+
     );
 
-    if (!booking) {
-      return res.status(404).json({
-        message: "Booking not found",
-      });
-    }
 
     res.json({
-      message: "Booking Rejected",
-      booking,
-    });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-const getAllBookings = async (req, res) => {
-  try {
-    const bookings = await Booking.find();
 
-    res.status(200).json(bookings);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+      message:"Booking Rejected",
+
+      booking
+
+    });
+
+
+
   }
+  catch(error){
+
+
+    res.status(500).json({
+
+      message:error.message
+
+    });
+
+
+  }
+
 };
+
+
+
+
+
+
+
+
+
+// Get All Bookings (Admin)
+
+const getAllBookings = async(req,res)=>{
+
+  try{
+
+
+    const bookings = await Booking.find()
+
+      .populate(
+        "userId",
+        "name email"
+      );
+
+
+
+    res.json(bookings);
+
+
+
+  }
+  catch(error){
+
+
+    res.status(500).json({
+
+      message:error.message
+
+    });
+
+
+  }
+
+};
+
+
+
+
+
 
 module.exports = {
+
   bookCab,
+
   getMyBookings,
+
   cancelBooking,
+
   acceptBooking,
+
   rejectBooking,
-  getAllBookings,
+
+  getAllBookings
+
 };

@@ -1,47 +1,49 @@
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { useEffect, useState } from "react";
+import Footer from "../components/Footer";
 import api from "../services/api";
 
 
-function AdminDashboard() {
+function AdminDashboard(){
 
-  const [bookings, setBookings] = useState([]);
-
-
-  useEffect(() => {
-    getAllBookings();
-  }, []);
+  const [bookings,setBookings] = useState([]);
 
 
-  const getAllBookings = async () => {
 
-    try {
+  useEffect(()=>{
 
-      const response = await api.get("/booking/all");
+    getBookings();
+
+
+    const interval = setInterval(()=>{
+
+      getBookings();
+
+    },5000);
+
+
+    return ()=>clearInterval(interval);
+
+
+  },[]);
+
+
+
+
+  const getBookings = async()=>{
+
+    try{
+
+      const response = await api.get(
+        "/booking/all"
+      );
+
 
       setBookings(response.data);
 
-    } catch(error) {
-
-      console.log(error);
-      alert("Failed to load bookings");
 
     }
-
-  };
-
-
-  const acceptBooking = async (id) => {
-
-    try {
-
-      await api.put(`/booking/accept/${id}`);
-
-      alert("Booking Accepted ✅");
-
-      getAllBookings();
-
-    } catch(error) {
+    catch(error){
 
       console.log(error);
 
@@ -50,17 +52,25 @@ function AdminDashboard() {
   };
 
 
-  const rejectBooking = async (id) => {
 
-    try {
 
-      await api.put(`/booking/reject/${id}`);
 
-      alert("Booking Rejected ❌");
 
-      getAllBookings();
+  const updateStatus = async(id,status)=>{
 
-    } catch(error) {
+    try{
+
+
+      await api.put(
+        `/booking/${status}/${id}`
+      );
+
+
+      getBookings();
+
+
+    }
+    catch(error){
 
       console.log(error);
 
@@ -69,100 +79,218 @@ function AdminDashboard() {
   };
 
 
-  return (
-    <div>
+
+
+
+
+
+  return(
+
+    <div
+      style={{
+        minHeight:"100vh",
+        background:"#fff8e7",
+        display:"flex",
+        flexDirection:"column"
+      }}
+    >
+
+
 
       <Navbar />
 
 
-      <h1 style={{textAlign:"center"}}>
-        Admin Dashboard 🚖
-      </h1>
 
 
-      <table
-        border="1"
+
+      <div
         style={{
-          width:"80%",
-          margin:"30px auto",
-          background:"white",
+          flex:1,
+          padding:"40px",
           textAlign:"center"
         }}
       >
 
-        <thead>
-
-          <tr>
-            <th>Pickup</th>
-            <th>Drop</th>
-            <th>Fare</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-
-        </thead>
 
 
-  <tbody>
-  {bookings.map((booking) => (
-    <tr key={booking._id}>
+        <h1
+          style={{
+            fontSize:"32px",
+            color:"#222"
+          }}
+        >
+          👨‍💼 Admin Dashboard
+        </h1>
 
-      <td>{booking.pickupCity}</td>
 
-      <td>{booking.dropCity}</td>
 
-      <td>₹{booking.fare}</td>
 
-      {/* Status */}
-      <td>
-        {booking.status === "Pending" && (
-          <b style={{ color: "orange" }}>Pending</b>
-        )}
 
-        {booking.status === "Accepted" && (
-          <b style={{ color: "green" }}>Accepted ✅</b>
-        )}
+        {
+          bookings.length === 0 ?
 
-        {booking.status === "Rejected" && (
-          <b style={{ color: "red" }}>Rejected ❌</b>
-        )}
 
-        {booking.status === "Cancelled" && (
-          <b style={{ color: "gray" }}>Cancelled 🚫</b>
-        )}
-      </td>
+          <p
+            style={{
+              marginTop:"50px",
+              fontSize:"20px",
+              color:"#777"
+            }}
+          >
+            No Bookings Available 🚕
+          </p>
 
-      {/* Action */}
-      <td>
-        {booking.status === "Pending" ? (
-          <>
-            <button
-              style={{ marginRight: "10px" }}
-              onClick={() => acceptBooking(booking._id)}
-            >
-              Accept
-            </button>
 
-            <button
-              onClick={() => rejectBooking(booking._id)}
-            >
-              Reject
-            </button>
-          </>
-        ) : (
-          <span>-</span>
-        )}
-      </td>
 
-    </tr>
-  ))}
-</tbody>
-      </table>
+          :
+
+
+
+          <div
+            style={{
+              display:"flex",
+              justifyContent:"center",
+              flexWrap:"wrap",
+              gap:"25px",
+              marginTop:"40px"
+            }}
+          >
+
+
+
+          {
+            bookings.map((booking)=>(
+
+
+              <div
+                key={booking._id}
+                style={{
+                  width:"320px",
+                  background:"#fff",
+                  padding:"25px",
+                  borderRadius:"15px",
+                  boxShadow:"0 5px 15px rgba(0,0,0,0.2)"
+                }}
+              >
+
+
+                <p>
+                  📍 From:
+                  <b> {booking.pickupCity}</b>
+                </p>
+
+
+                <p>
+                  📍 To:
+                  <b> {booking.dropCity}</b>
+                </p>
+
+
+                <p>
+                  💰 Fare:
+                  <b> ₹{booking.fare}</b>
+                </p>
+
+
+                <p>
+                  Status:
+                  <b> {booking.status}</b>
+                </p>
+
+
+
+
+
+                {
+                  booking.status === "Pending" &&
+
+                  <div
+                    style={{
+                      display:"flex",
+                      gap:"10px"
+                    }}
+                  >
+
+                    <button
+                      onClick={()=>
+                        updateStatus(
+                          booking._id,
+                          "accept"
+                        )
+                      }
+                      style={{
+                        flex:1,
+                        padding:"10px",
+                        background:"#28a745",
+                        color:"#fff",
+                        border:"none",
+                        borderRadius:"8px",
+                        cursor:"pointer"
+                      }}
+                    >
+                      Accept
+                    </button>
+
+
+
+
+                    <button
+                      onClick={()=>
+                        updateStatus(
+                          booking._id,
+                          "reject"
+                        )
+                      }
+                      style={{
+                        flex:1,
+                        padding:"10px",
+                        background:"#dc3545",
+                        color:"#fff",
+                        border:"none",
+                        borderRadius:"8px",
+                        cursor:"pointer"
+                      }}
+                    >
+                      Reject
+                    </button>
+
+
+                  </div>
+
+                }
+
+
+
+              </div>
+
+
+            ))
+
+          }
+
+
+          </div>
+
+
+        }
+
+
+
+      </div>
+
+
+
+
+
+      <Footer />
 
 
     </div>
+
   );
+
 }
+
 
 
 export default AdminDashboard;
