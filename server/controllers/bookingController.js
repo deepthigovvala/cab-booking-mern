@@ -1,9 +1,6 @@
 const Booking = require("../models/Booking");
 
 
-
-// Create Booking
-
 const bookCab = async (req, res) => {
 
   try {
@@ -60,13 +57,6 @@ const bookCab = async (req, res) => {
 
 };
 
-
-
-
-
-
-// Get User Bookings
-
 const getMyBookings = async(req,res)=>{
 
   try{
@@ -98,14 +88,6 @@ const getMyBookings = async(req,res)=>{
 
 };
 
-
-
-
-
-
-
-
-// Cancel Booking
 
 const cancelBooking = async(req,res)=>{
 
@@ -150,13 +132,6 @@ const cancelBooking = async(req,res)=>{
 };
 
 
-
-
-
-
-
-
-// Accept Booking
 
 const acceptBooking = async(req,res)=>{
 
@@ -203,16 +178,6 @@ const acceptBooking = async(req,res)=>{
 
 };
 
-
-
-
-
-
-
-
-
-// Reject Booking
-
 const rejectBooking = async(req,res)=>{
 
   try{
@@ -258,16 +223,6 @@ const rejectBooking = async(req,res)=>{
 
 };
 
-
-
-
-
-
-
-
-
-// Get All Bookings (Admin)
-
 const getAllBookings = async(req,res)=>{
 
   try{
@@ -300,10 +255,6 @@ const getAllBookings = async(req,res)=>{
   }
 
 };
-
-
-
-
 
 
 module.exports = {

@@ -4,7 +4,7 @@ const Booking = require("../models/Booking");
 
 
 
-// Dashboard Stats
+
 
 const getStats = async (req,res)=>{
 
@@ -48,7 +48,7 @@ const getStats = async (req,res)=>{
 
 
 
-// Get All Users
+
 
 const getAllUsers = async(req,res)=>{
 

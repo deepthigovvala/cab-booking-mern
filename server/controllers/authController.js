@@ -1,13 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
-
-
-// Register User
-
 const registerUser = async(req,res)=>{
-
   try{
 
 
@@ -35,15 +29,11 @@ const registerUser = async(req,res)=>{
     }
 
 
-
-
     const hashedPassword =
     await bcrypt.hash(
       password,
       10
     );
-
-
 
 
     const user = await User.create({
@@ -57,9 +47,6 @@ const registerUser = async(req,res)=>{
       role: role || "user"
 
     });
-
-
-
 
     res.status(201).json({
 
@@ -83,17 +70,6 @@ const registerUser = async(req,res)=>{
   }
 
 };
-
-
-
-
-
-
-
-
-
-// Login User
-
 
 const loginUser = async(req,res)=>{
 
