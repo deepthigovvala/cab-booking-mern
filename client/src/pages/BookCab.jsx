@@ -3,35 +3,20 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
-
-
 function BookCab(){
-
   const navigate = useNavigate();
-
-
   const [pickupCity,setPickupCity] = useState("");
   const [dropCity,setDropCity] = useState("");
-  const [fare,setFare] = useState("");
   const [date,setDate] = useState("");
   const [time,setTime] = useState("");
-
-
-
   const bookCab = async(e)=>{
-
     e.preventDefault();
-
-
     try{
-
-
       const response = await api.post(
         "/booking/book",
         {
           pickupCity,
           dropCity,
-          fare,
           date,
           time
         },
@@ -42,35 +27,16 @@ function BookCab(){
           }
         }
       );
-
-
-
       console.log(response.data);
-
-
       alert("Cab Booked Successfully 🚕");
-
-
       navigate("/mybookings");
-
-
     }
     catch(error){
-
       console.log(error);
-
       alert("Booking Failed");
-
     }
-
   };
-
-
-
-
-
   return(
-
     <div
       style={{
         minHeight:"100vh",
@@ -79,12 +45,7 @@ function BookCab(){
         flexDirection:"column"
       }}
     >
-
-
       <Navbar />
-
-
-
       <div
         style={{
           flex:1,
@@ -94,9 +55,6 @@ function BookCab(){
           padding:"40px"
         }}
       >
-
-
-
         <form
           onSubmit={bookCab}
           style={{
@@ -107,8 +65,6 @@ function BookCab(){
             boxShadow:"0 5px 20px rgba(0,0,0,0.2)"
           }}
         >
-
-
           <h1
             style={{
               textAlign:"center"
@@ -116,9 +72,6 @@ function BookCab(){
           >
             🚕 Book Cab
           </h1>
-
-
-
           <input
             placeholder="Pickup City"
             value={pickupCity}
@@ -126,9 +79,6 @@ function BookCab(){
             style={inputStyle}
             required
           />
-
-
-
           <input
             placeholder="Drop City"
             value={dropCity}
@@ -136,19 +86,6 @@ function BookCab(){
             style={inputStyle}
             required
           />
-
-
-
-          <input
-            placeholder="Fare"
-            value={fare}
-            onChange={(e)=>setFare(e.target.value)}
-            style={inputStyle}
-            required
-          />
-
-
-
           <input
             type="date"
             value={date}
@@ -156,9 +93,6 @@ function BookCab(){
             style={inputStyle}
             required
           />
-
-
-
           <input
             type="time"
             value={time}
@@ -166,9 +100,6 @@ function BookCab(){
             style={inputStyle}
             required
           />
-
-
-
           <button
             type="submit"
             style={{
@@ -183,13 +114,7 @@ function BookCab(){
           >
             Book Now
           </button>
-
-
-
         </form>
-
-
-
       </div>
 
 
@@ -202,9 +127,6 @@ function BookCab(){
   );
 
 }
-
-
-
 const inputStyle={
 
   width:"100%",
@@ -215,7 +137,4 @@ const inputStyle={
   boxSizing:"border-box"
 
 };
-
-
-
 export default BookCab;
