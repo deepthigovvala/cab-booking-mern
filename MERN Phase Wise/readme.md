@@ -123,18 +123,6 @@ export default api;
 ```
 
 
----
-
-## 👥 Team Members
-
-- **Pavan Sri Ambikesh Pilli** – Team Lead
-- **Govvala Harika Deepthi**
-- **Sayan Kar**
-- **Vamsi Meesala**
-- **Suvarna Ratnam Naradala**
-
----
-
 ## 📄 License
 
 This project was developed for academic purposes as part of the **UCAB – MERN Stack Cab Booking System**.
