@@ -1,101 +1,43 @@
-# 🎥 UCAB – Project Video Demo
+# 🎬 Video Demonstration
 
-Welcome to the **Video Demo** folder of the **UCAB – MERN Stack Cab Booking System**.
+This folder contains the demonstration video for the **UCAB – MERN Stack Cab Booking System**.
 
-This folder contains a complete demonstration video of the project, showcasing the application's features, workflow, and functionality. The video includes a **clear voice-over explanation** describing each module, the technologies used, and how users interact with the system.
+## 📖 About the Demo
 
----
+The video is designed to provide a complete walkthrough of the application from a user's perspective. It demonstrates how different modules interact with each other and highlights the overall workflow of the system.
 
-## 📹 What the Demo Covers
+Unlike static screenshots, the video presents the application in real time with a **voice-over explanation**, making it easier to understand the purpose and functionality of each feature.
 
-The video demonstrates the complete working flow of the application, including:
+## 🎥 Demonstrated Workflow
 
-- 🏠 Landing/Home Page
-- 👤 User Registration
-- 🔐 User Login
-- 📊 User Dashboard
-- 🚖 Cab Booking Process
-- 📍 Selecting Pickup & Drop Locations
-- 🚘 Viewing Available Cabs
-- 💰 Fare Estimation
-- ✅ Booking Confirmation
-- 📋 Viewing Booking History (My Bookings)
-- 🛠️ Admin Dashboard
-- ✔️ Accepting Booking Requests
-- ❌ Rejecting Booking Requests
-- 🚪 User Logout
+The demonstration includes:
 
----
+- Application launch
+- User registration
+- User authentication
+- Dashboard navigation
+- Cab booking process
+- Viewing available cabs
+- Booking confirmation
+- Booking history
+- Administrator dashboard
+- Accepting and rejecting booking requests
+- User logout
 
-## 🎙️ Voice-Over Explanation
+## 🎙️ Voice-Over
 
-The demonstration video includes a detailed voice-over that explains:
+The video includes a narrated explanation that describes:
 
-- The purpose and objectives of the UCAB project.
-- The overall workflow of the application.
-- Navigation through each module and page.
-- How users can register, log in, and book cabs.
-- How the admin manages booking requests.
-- The technologies used to develop the application.
-- The successful deployment of both the frontend and backend services.
+- The objective of the project
+- Navigation through each page
+- User interactions
+- Admin functionalities
+- Overall application workflow
 
-This narration helps viewers understand the project's functionality without requiring additional documentation.
-
----
-
-## 🌐 Live Application
-
-**Frontend:**  
-https://cab-booking-mern-2.onrender.com
-
-**Backend API:**  
-https://cab-booking-mern-1.onrender.com
-
----
-
-## 💻 Source Code
-
-GitHub Repository:  
-https://github.com/deepthigovvala/cab-booking-mern
-
----
-
-## Deployment
-
-Application URL:  
-https://cab-booking-mern-5.onrender.com
-
----
-
-## 🛠️ Technology Stack
-
-- React.js
-- Node.js
-- Express.js
-- MongoDB
-- HTML5
-- CSS3
-- JavaScript
-- Axios
-
----
-
-## 👥 Team Members
-
-- **Pavan Sri Ambikesh Pilli** – Team Lead
-- **Govvala Harika Deepthi**
-- **Sayan Kar**
-- **Vamsi Meesala**
-- **Suvarna Ratnam Naradala**
-
----
+The narration is intended to help reviewers understand the implementation without referring to additional documentation.
 
 ## 📌 Purpose
 
-The purpose of this demonstration video is to present the complete implementation and functionality of the **UCAB – MERN Stack Cab Booking System**. It serves as a visual walkthrough for project reviewers, mentors, and evaluators, highlighting the user interface, system features, and successful execution of the application through a narrated demonstration.
+This demonstration serves as a visual reference for project evaluation and provides a concise overview of the application's functionality and user experience.
 
----
-
-**Project:** UCAB – MERN Stack Cab Booking System  
-**Domain:** Transportation  
-**Academic Project | MERN Stack Development**
+> **Note:** The application shown in this video corresponds to the latest implementation available in this repository.
