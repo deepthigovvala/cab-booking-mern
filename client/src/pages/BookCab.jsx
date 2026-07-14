@@ -3,40 +3,72 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
-function BookCab(){
+
+function BookCab() {
+
   const navigate = useNavigate();
-  const [pickupCity,setPickupCity] = useState("");
-  const [dropCity,setDropCity] = useState("");
-  const [date,setDate] = useState("");
-  const [time,setTime] = useState("");
-  const bookCab = async(e)=>{
+
+  const [pickupCity, setPickupCity] = useState("");
+  const [dropCity, setDropCity] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [period, setPeriod] = useState("AM");
+
+
+  const bookCab = async (e) => {
     e.preventDefault();
-    try{
+
+    try {
+
+      const token = localStorage.getItem("token");
+
+      if(!token){
+        alert("Please Login First");
+        navigate("/login");
+        return;
+      }
+
+
       const response = await api.post(
         "/booking/book",
         {
           pickupCity,
           dropCity,
           date,
-          time
+          time: `${time} ${period}`,
+          fare: "500"
         },
         {
           headers:{
-            Authorization:
-            `Bearer ${localStorage.getItem("token")}`
+            Authorization:`Bearer ${token}`
           }
         }
       );
+
+
       console.log(response.data);
+
       alert("Cab Booked Successfully 🚕");
+
       navigate("/mybookings");
+
+
+    } catch(error){
+
+      console.log("Booking Error:",error);
+      console.log(error.response);
+
+      alert(
+        error.response?.data?.message ||
+        "Booking Failed"
+      );
     }
-    catch(error){
-      console.log(error);
-      alert("Booking Failed");
-    }
+
   };
-  return(
+
+
+  return (
+
     <div
       style={{
         minHeight:"100vh",
@@ -45,7 +77,10 @@ function BookCab(){
         flexDirection:"column"
       }}
     >
-      <Navbar />
+
+      <Navbar/>
+
+
       <div
         style={{
           flex:1,
@@ -55,6 +90,8 @@ function BookCab(){
           padding:"40px"
         }}
       >
+
+
         <form
           onSubmit={bookCab}
           style={{
@@ -65,27 +102,34 @@ function BookCab(){
             boxShadow:"0 5px 20px rgba(0,0,0,0.2)"
           }}
         >
-          <h1
-            style={{
-              textAlign:"center"
-            }}
-          >
+
+
+          <h1 style={{textAlign:"center"}}>
             🚕 Book Cab
           </h1>
+
+
           <input
+            type="text"
             placeholder="Pickup City"
             value={pickupCity}
             onChange={(e)=>setPickupCity(e.target.value)}
             style={inputStyle}
             required
           />
+
+
           <input
+            type="text"
             placeholder="Drop City"
             value={dropCity}
             onChange={(e)=>setDropCity(e.target.value)}
             style={inputStyle}
             required
           />
+
+
+
           <input
             type="date"
             value={date}
@@ -93,13 +137,56 @@ function BookCab(){
             style={inputStyle}
             required
           />
-          <input
-            type="time"
-            value={time}
-            onChange={(e)=>setTime(e.target.value)}
-            style={inputStyle}
-            required
-          />
+
+
+
+          <div
+            style={{
+              display:"flex",
+              gap:"10px"
+            }}
+          >
+
+            <input
+              type="time"
+              value={time}
+              onChange={(e)=>setTime(e.target.value)}
+              style={{
+                ...inputStyle,
+                flex:2,
+                marginBottom:"15px"
+              }}
+              required
+            />
+
+
+            <select
+              value={period}
+              onChange={(e)=>setPeriod(e.target.value)}
+              style={{
+                flex:1,
+                height:"45px",
+                borderRadius:"8px",
+                border:"1px solid #ccc"
+              }}
+            >
+
+              <option value="AM">
+                AM
+              </option>
+
+              <option value="PM">
+                PM
+              </option>
+
+            </select>
+
+
+          </div>
+
+
+
+
           <button
             type="submit"
             style={{
@@ -112,22 +199,29 @@ function BookCab(){
               cursor:"pointer"
             }}
           >
+
             Book Now
+
           </button>
+
+
         </form>
+
+
       </div>
 
 
-
-      <Footer />
+      <Footer/>
 
 
     </div>
 
   );
-
 }
-const inputStyle={
+
+
+
+const inputStyle = {
 
   width:"100%",
   padding:"12px",
@@ -137,4 +231,6 @@ const inputStyle={
   boxSizing:"border-box"
 
 };
+
+
 export default BookCab;
