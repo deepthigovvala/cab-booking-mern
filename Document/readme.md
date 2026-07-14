@@ -1,38 +1,35 @@
-# 📄 Project Documentation
+# 📂 Project Documentation
 
-This folder contains all the project documentation for the **UCAB – MERN Stack Cab Booking System**.
+This folder contains the complete documentation prepared during the planning, design, development, and implementation of the **UCAB – MERN Stack Cab Booking System**.
 
-## 📂 Documents
-
-| Document | Description |
-|----------|-------------|
-| **Brainstorming & Ideation** | Contains the initial brainstorming ideas, problem statement, proposed solution, objectives, and feature discussions for the UCAB project. |
-| **Requirement Analysis.docx** | Describes the functional requirements, non-functional requirements, system requirements, use cases, and software/hardware requirements. |
-| **Project Planning.docx** | Includes the product backlog, sprint planning, user stories, story points, sprint schedule, project tracker, velocity, and burndown chart. |
-| **Project Design.pdf** | Contains the system architecture, database design, UML diagrams, ER diagram, UI wireframes, and overall system design. |
-| **cab_booking.docx** | Final project report containing the project overview, implementation details, technologies used, screenshots, testing, results, and conclusion. |
-
-## 🛠️ Project Information
-
-- **Project Name:** UCAB – MERN Stack Cab Booking System
-- **Domain:** Transportation
-- **Technology Stack:**
-  - MongoDB
-  - Express.js
-  - React.js
-  - Node.js
-  - HTML
-  - CSS
-  - JavaScript
-
-## 👥 Team Members
-
-- Pavan Sri Ambikesh Pilli (Team Lead)
-- Govvala Harika Deepthi
-- Sayan Kar
-- Vamsi Meesala
-- Suvarna Ratnam Naradala
+The documents included here capture the project's lifecycle, from initial idea generation to final design and planning. They serve as supporting material for understanding the project's objectives, requirements, architecture, and development process.
 
 ---
 
-**Academic Project – UCAB MERN Stack Cab Booking System**
+## 📑 Documents Included
+
+### 🧠 Brainstorming & Ideation
+Contains the initial project ideas, problem identification, proposed solution, objectives, and feature discussions that formed the foundation of the UCAB system.
+
+### 📋 Requirement Analysis
+Documents the functional and non-functional requirements, user requirements, system requirements, assumptions, and project scope.
+
+### 📅 Project Planning
+Includes product backlog, user stories, sprint planning, story point estimation, sprint schedule, project tracker, velocity calculation, and burndown chart.
+
+### 🏗️ Project Design
+Describes the overall system architecture, database design, UML diagrams, workflow diagrams, and application design.
+
+### 📖 Project Report
+Provides a detailed report covering the implementation, technologies used, modules developed, testing, results, and project conclusion.
+
+---
+
+## 🎯 Purpose
+
+These documents provide a structured record of the project's planning, analysis, design, and development activities. They demonstrate the engineering process followed during the implementation of the UCAB Cab Booking System and act as reference material for project evaluation and future enhancements.
+
+---
+
+**Project:** UCAB – MERN Stack Cab Booking System  
+**Category:** Project Documentation
