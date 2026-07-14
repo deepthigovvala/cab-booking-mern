@@ -54,15 +54,5 @@ This folder contains screenshots demonstrating the workflow and key features of 
 
 ---
 
-## 👥 Team Members
-
-- Pavan Sri Ambikesh Pilli (Team Lead)
-- Govvala Harika Deepthi
-- Sayan Kar
-- Vamsi Meesala
-- Suvarna Ratnam Naradala
-
----
-
 **Project:** UCAB – MERN Stack Cab Booking System  
 **Domain:** Transportation
