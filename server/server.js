@@ -5,11 +5,11 @@ require("dotenv").config();
 const app = express();
 
 app.use(cors({
-    origin: [
-        "http://localhost:5173",
-        "https://cab-booking-mern-1.onrender.com"
-    ],
-    credentials: true
+  origin: [
+    "http://localhost:5173",
+    "https://cab-booking-mern-5.onrender.com"
+  ],
+  credentials: true,
 }));
 
 app.use(express.json());
