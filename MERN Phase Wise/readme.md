@@ -15,9 +15,6 @@ https://cab-booking-mern-1.onrender.com
 **GitHub Repository:**  
 https://github.com/deepthigovvala/cab-booking-mern
 
-**Project Documentation:**  
-https://drive.google.com/drive/folders/1C0JuwyCPctzw7hQ2qI9diGBm0ax7ZVOb
-
 **Deployed URL:**
 https://cab-booking-mern-5.onrender.com
 
