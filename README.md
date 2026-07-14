@@ -61,7 +61,7 @@ The project focuses on providing a simple, responsive, and user-friendly transpo
 
 | Service | URL |
 |----------|-----|
-| 🚀 Frontend | https://cab-booking-mern-5.onrender.com |
+| 🚀 Frontend | https://cab-booking-mern-2.onrender.com |
 | ⚙️ Backend API | https://cab-booking-mern-1.onrender.com |
 
 
