@@ -1,7 +1,3 @@
-**                                           Academic Project – UCAB MERN Stack Cab Booking System**
-
-
-
 # 📄 Project Documentation
 
 This folder contains all the project documentation for the **UCAB – MERN Stack Cab Booking System**.
@@ -36,3 +32,7 @@ This folder contains all the project documentation for the **UCAB – MERN Stack
 - Sayan Kar
 - Vamsi Meesala
 - Suvarna Ratnam Naradala
+
+---
+
+**Academic Project – UCAB MERN Stack Cab Booking System**
