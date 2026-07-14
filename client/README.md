@@ -1,16 +1,100 @@
-# React + Vite
+# 💻 Client Module
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This directory contains the frontend implementation of the **UCAB – MERN Stack Cab Booking System**. The client is built using **React.js** and **Vite**, providing a responsive and interactive interface for users and administrators.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📁 Folder Purpose
 
-## React Compiler
+The client module is responsible for:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Rendering the user interface
+- Managing application routing
+- Communicating with the backend APIs
+- Handling user authentication
+- Managing cab booking operations
+- Displaying booking history and admin views
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## 📂 Directory Structure
+
+```
+client/
+├── public/
+├── src/
+│   ├── api/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── style.css
+├── package.json
+└── vite.config.js
+```
+
+---
+
+## ⚙️ Frontend Technologies
+
+- React.js
+- Vite
+- JavaScript (ES6)
+- HTML5
+- CSS3
+- Axios
+- React Router DOM
+
+---
+
+## 🚀 Running the Client
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The application will be available at:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🔗 Backend Connection
+
+The frontend communicates with the backend through Axios.
+
+Default API:
+
+```
+https://cab-booking-mern-1.onrender.com/api
+```
+
+---
+
+## 📄 Key Pages
+
+- Home
+- Register
+- Login
+- Dashboard
+- Book Cab
+- My Bookings
+- Admin Dashboard
+
+---
+
+## 📌 Note
+
+This folder contains only the frontend source code. Backend services, database configuration, and REST APIs are maintained in the **server** module of this repository.
